@@ -1,22 +1,14 @@
 package com.example.jigsaw;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,10 +63,33 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login,
                 container, false);
+        view.findViewById(R.id.login_button).setOnClickListener((v) -> {
+            login();
+        });
         view.findViewById(R.id.register_button).setOnClickListener((v) -> {
             register();
         });
         return view;
+    }
+
+    public void login(){
+        LevelFragment levelFragment = new LevelFragment();
+
+        // 获取 Fragment 管理器
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+        // 开始 Fragment 事务
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        Fragment oldFragment = fragmentManager.findFragmentById(R.id.register_fragment);
+        if (oldFragment != null) {
+            transaction.remove(oldFragment);
+        }
+        // 用新的 Fragment 替换当前 Fragment（假设是 LoginFragment）
+        transaction.replace(R.id.game, levelFragment);
+
+        // 提交事务
+        transaction.commit();
     }
 
     public void register() {

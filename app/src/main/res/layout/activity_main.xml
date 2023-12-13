@@ -7,13 +7,7 @@
     android:name="com.example.jigsaw.LoginFragment"
     tools:layout="@layout/fragment_login"
     tools:context=".MainActivity">
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:text="测试"-->
-<!--        tools:ignore="MissingConstraints">-->
-<!--    </TextView>-->
+
 
 
 
