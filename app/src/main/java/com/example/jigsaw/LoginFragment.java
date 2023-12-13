@@ -71,13 +71,13 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login,
                 container, false);
-        view.findViewById(R.id.login_button).setOnClickListener((v) -> {
-            login();
+        view.findViewById(R.id.register_button).setOnClickListener((v) -> {
+            register();
         });
         return view;
     }
 
-    public void login() {
+    public void register() {
         RegisterFragment registerFragment = new RegisterFragment();
 
         // 获取 Fragment 管理器

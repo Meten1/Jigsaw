@@ -7,6 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".RegisterFragment">
 
+    <ImageView
+        android:id="@+id/login_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@drawable/blank"
+        android:layout_marginTop="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/login_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/login"
+        tools:ignore="ContentDescription" />
+
 
     <LinearLayout
         android:id="@+id/login_input"
@@ -36,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:autofillHints=""
             android:background="@drawable/login_edit_text"
             android:ems="10"
@@ -44,6 +59,35 @@
             android:inputType="textPassword"
             android:lines="1"
             android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/recover_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@drawable/login_edit_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/recover"
+            android:lines="1"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="55dp"
+            android:layout_marginTop="10dp"
+            android:ems="8"
+            android:text="@string/register_login"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_input"
+            app:toggleCheckedStateOnClick="false"
+            tools:ignore="ButtonStyle,UsingOnClickInXml" />
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

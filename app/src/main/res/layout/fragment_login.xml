@@ -79,11 +79,11 @@
             tools:ignore="ButtonStyle,UsingOnClickInXml" />
 
         <Button
+            android:id="@+id/register_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:ems="8"
-            android:onClick="register"
             android:text="@string/register"
             tools:ignore="ButtonStyle,UsingOnClickInXml" />
 

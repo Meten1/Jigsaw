@@ -6,4 +6,6 @@
     <string name="register">注册</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recover">恢复代码</string>
+    <string name="register_login">注册并登录</string>
 </resources>
