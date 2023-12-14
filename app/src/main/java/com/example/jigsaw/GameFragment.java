@@ -1,5 +1,7 @@
 package com.example.jigsaw;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -90,16 +92,16 @@ public class GameFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
-        username = mParam1;
+        difficulty = mParam1;
+        username = mParam2;
 
-        side_quantity = 4;
-//        if (difficulty.equals("Easy")) {
-//            side_quantity = 2;
-//        } else if (difficulty.equals("Medium")) {
-//            side_quantity = 3;
-//        } else {
-//            side_quantity = 4;
-//        }
+        if (difficulty.equals("简单")) {
+            side_quantity = 2;
+        } else if (difficulty.equals("中等")) {
+            side_quantity = 3;
+        } else {
+            side_quantity = 4;
+        }
 
         Random random = new Random();
 
@@ -156,9 +158,9 @@ public class GameFragment extends Fragment {
                                     (ImageButton) linearLayout1.getChildAt(j1);
                             if (imageButton1 == click_button) {
                                 int[] coordinate = {j1, i1};
-//                                move(coordinate);
-//                                check_win();
-//                                update_status();
+                                move(coordinate);
+                                check_win();
+                                update_status();
                                 break;
                             }
 
@@ -169,6 +171,26 @@ public class GameFragment extends Fragment {
                 linearLayout.addView(imageButton);
             }
         }
+    }
+
+    private void check_win() {
+        boolean is_win = true;
+        int correct_index = 0;
+        for (int i = 0; i < side_quantity; i++) {
+            for (int j = 0; j < side_quantity; j++) {
+                if (indexs[i][j] != correct_index) {
+                    is_win = false;
+                }
+                correct_index++;
+            }
+        }
+        if (is_win) {
+            game_end(true);
+        }
+    }
+
+    public void abandon(View view) {
+        game_end(false);
     }
 
     private void set_images() {
@@ -221,4 +243,20 @@ public class GameFragment extends Fragment {
         return nums_two;
     }
 
+    private void move(int[] coordinate) {
+        int temp = indexs[coordinate[1]][coordinate[0]];
+        indexs[coordinate[1]][coordinate[0]] = indexs[blankXY[1]][blankXY[0]];
+        indexs[blankXY[1]][blankXY[0]] = temp;
+        set_images();
+    }
+
+    private void game_end(boolean is_win) {
+
+    }
+
+    @SuppressLint("DefaultLocale")
+    private void update_status() {
+        step++;
+        step_show.setText(String.format("你走了%d步", step));
+    }
 }

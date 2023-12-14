@@ -1,9 +1,12 @@
 package com.example.jigsaw;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -57,20 +60,15 @@ public class LevelFragment extends Fragment {
         }
     }
 
-//    private Difficulty level;
-//
-//    public Difficulty getLevel() {
-//        return level;
-//    }
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_level,
+        view = inflater.inflate(R.layout.fragment_level,
                 container, false);
-//        final Spinner spinner = view.findViewById(R.id.difficulty);
-//        final TextView currentLevel = view.findViewById(R.id.current_level);
+
 //
 //        view.findViewById(R.id.play).setOnClickListener((v) -> {
 //
@@ -81,8 +79,12 @@ public class LevelFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("SetTextI18n")
     public void play(){
-        GameFragment gameFragment = GameFragment.newInstance("111","222");
+        Spinner spinner = view.findViewById(R.id.difficulty);
+        TextView currentLevel = view.findViewById(R.id.current_level);
+        currentLevel.setText("难度："+spinner.getSelectedItem().toString());
+        GameFragment gameFragment = GameFragment.newInstance(spinner.getSelectedItem().toString(),"Meten");
 
         // 获取 Fragment 管理器
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
