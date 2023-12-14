@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 
 /**
@@ -73,7 +75,30 @@ public class LevelFragment extends Fragment {
 //        view.findViewById(R.id.play).setOnClickListener((v) -> {
 //
 //        });
+        view.findViewById(R.id.play).setOnClickListener((v) -> {
+            play();
+        });
         return view;
+    }
+
+    public void play(){
+        GameFragment gameFragment = GameFragment.newInstance("111","222");
+
+        // 获取 Fragment 管理器
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+        // 开始 Fragment 事务
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        Fragment oldFragment = fragmentManager.findFragmentById(R.id.level_fragment);
+        if (oldFragment != null) {
+            transaction.remove(oldFragment);
+        }
+        // 用新的 Fragment 替换当前 Fragment（假设是 LoginFragment）
+        transaction.replace(R.id.game_board, gameFragment);
+
+        // 提交事务
+        transaction.commit();
     }
 
 

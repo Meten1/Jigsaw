@@ -84,7 +84,7 @@ public class RegisterFragment extends Fragment {
             transaction.remove(oldFragment);
         }
         // 用新的 Fragment 替换当前 Fragment（假设是 LoginFragment）
-        transaction.replace(R.id.game, levelFragment);
+        transaction.replace(R.id.game_board, levelFragment);
 
         // 提交事务
         transaction.commit();

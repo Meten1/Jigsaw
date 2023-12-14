@@ -10,6 +10,9 @@
     <string name="register_login">注册并登录</string>
     <string name="level">难度：？</string>
     <string name="play">开始</string>
+    <string name="please_complete_the_picture">请完成拼图</string>
+    <string name="you_have_took_0_steps">你走了0步</string>
+    <string name="give_up">放弃</string>
 
     <string-array name="difficulty">
         <item>简单</item>
