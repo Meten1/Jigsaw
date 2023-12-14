@@ -7,6 +7,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -86,6 +89,7 @@ public class GameFragment extends Fragment {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -135,6 +139,9 @@ public class GameFragment extends Fragment {
 
         add_Jigsaws();
         set_images();
+        view.findViewById(R.id.give_up_botton).setOnClickListener((v) -> {
+            game_end(false);
+        });
         return view;
     }
 
@@ -163,10 +170,8 @@ public class GameFragment extends Fragment {
                                 update_status();
                                 break;
                             }
-
                         }
                     }
-
                 });
                 linearLayout.addView(imageButton);
             }
@@ -251,7 +256,30 @@ public class GameFragment extends Fragment {
     }
 
     private void game_end(boolean is_win) {
+        ArrayList<String> data = new ArrayList<>();
+        data.add(image_name);
+        data.add(String.valueOf(image_index));
+        data.add(String.valueOf(screen_width));
+        data.add(username);
+        data.add(String.valueOf(step));
+        data.add(difficulty);
 
+        ScoreFragment scoreFragment = ScoreFragment.newInstance(data,is_win);
+
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+        // 开始 Fragment 事务
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        Fragment oldFragment = fragmentManager.findFragmentById(R.id.game_fragment);
+        if (oldFragment != null) {
+            transaction.remove(oldFragment);
+        }
+        // 用新的 Fragment 替换当前 Fragment（假设是 LoginFragment）
+        transaction.replace(R.id.game_board, scoreFragment);
+
+        // 提交事务
+        transaction.commit();
     }
 
     @SuppressLint("DefaultLocale")

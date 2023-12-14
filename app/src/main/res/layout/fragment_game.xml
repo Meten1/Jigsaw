@@ -71,12 +71,12 @@
 
 
         <Button
+            android:id="@+id/give_up_botton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="25sp"
             android:text="@string/give_up"
-            android:onClick="abandon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
