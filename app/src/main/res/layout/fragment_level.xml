@@ -15,6 +15,7 @@
         android:orientation="horizontal"
         android:text="@string/level"
         android:textSize="30sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/difficulty"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:entries="@array/difficulty"
+        android:minHeight="48dp"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,10 +40,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/play"
-        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/difficulty" />
+        app:layout_constraintTop_toBottomOf="@+id/difficulty"
+        style="@style/start_button"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

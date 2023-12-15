@@ -8,7 +8,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recover">恢复代码</string>
     <string name="register_login">注册并登录</string>
-    <string name="level">难度：？</string>
+    <string name="level">请选择难度</string>
     <string name="play">开始</string>
     <string name="please_complete_the_picture">请完成拼图</string>
     <string name="you_have_took_0_steps">你走了0步</string>
@@ -20,6 +20,5 @@
         <item>简单</item>
         <item>中等</item>
         <item>困难</item>
-        <item>专家</item>
     </string-array>
 </resources>
