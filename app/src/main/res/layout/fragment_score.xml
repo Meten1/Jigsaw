@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/score_fragment"
     tools:context=".ScoreFragment">
 
     <TextView
@@ -50,16 +51,30 @@
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/intact_image" />
 
-    <Button
-        android:id="@+id/button"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/play_again"
-        android:textColor="@color/black"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image"
-        tools:ignore="UsingOnClickInXml" />
+        tools:ignore="UsingOnClickInXml"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/again_button"
+            android:layout_width="110sp"
+            android:layout_height="wrap_content"
+            android:text="@string/play_again"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/stop_button"
+            android:layout_width="110sp"
+            android:layout_height="wrap_content"
+            android:text="@string/stop_play"
+            android:textColor="@color/white"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

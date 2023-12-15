@@ -1,5 +1,8 @@
 package com.example.jigsaw;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,19 +62,61 @@ public class LoginFragment extends Fragment {
         }
     }
 
+    SqlManager sqlManager;
+    EditText name_input;
+    EditText password_input;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login,
                 container, false);
+        sqlManager = new SqlManager(getActivity(), "user.db", null, 1);
+        name_input = view.findViewById(R.id.name_input);
+        password_input = view.findViewById(R.id.password_input);
+
         view.findViewById(R.id.login_button).setOnClickListener((v) -> {
-            login();
+            check();
         });
         view.findViewById(R.id.register_button).setOnClickListener((v) -> {
             register();
         });
         return view;
+    }
+
+    public void check(){
+        String username = name_input.getText().toString();
+        String password = password_input.getText().toString();
+        if (!username.equals("") && !password.equals("")) {
+            SQLiteDatabase db = sqlManager.getReadableDatabase();
+            String[] columns = {"username", "password"};
+            Cursor cursor = db.query("user", columns,
+                    String.format("username = '%s'", username),
+                    null, null, null, null);
+            if (cursor.moveToNext()) {
+                if (password.equals(cursor.getString(1))) {
+                    Toast.makeText(getActivity(),
+                            "登陆成功，欢迎！", Toast.LENGTH_LONG).show();
+                    cursor.close();
+                    db.close();
+                    login();
+                } else {
+                    Toast.makeText(getActivity(),
+                            "用户名或密码错误，请检查你的用户名与密码！",
+                            Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(getActivity(),
+                        "此用户不存在", Toast.LENGTH_LONG).show();
+            }
+            cursor.close();
+            db.close();
+            password_input.setText("");
+        } else {
+            Toast.makeText(getActivity(),
+                    "用户名与密码不可为空", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void login(){

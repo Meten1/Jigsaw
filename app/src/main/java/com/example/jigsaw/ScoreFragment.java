@@ -6,6 +6,8 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -118,6 +120,54 @@ public class ScoreFragment extends Fragment {
         step_tip = view.findViewById(R.id.step_tip);
         step_tip.setText(String.format("你一共走了%d步", step));
 
+        view.findViewById(R.id.again_button).setOnClickListener((v) -> {
+            again();
+        });
+
+        view.findViewById(R.id.stop_button).setOnClickListener((v) -> {
+            stop();
+        });
+
         return view;
+    }
+
+    public void again() {
+        LevelFragment levelFragment = new LevelFragment();
+
+        // 获取 Fragment 管理器
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+        // 开始 Fragment 事务
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        Fragment oldFragment = fragmentManager.findFragmentById(R.id.score_fragment);
+        if (oldFragment != null) {
+            transaction.remove(oldFragment);
+        }
+        // 用新的 Fragment 替换当前 Fragment（假设是 LoginFragment）
+        transaction.replace(R.id.game_board, levelFragment);
+
+        // 提交事务
+        transaction.commit();
+    }
+
+    public void stop() {
+        LoginFragment loginFragment = new LoginFragment();
+
+        // 获取 Fragment 管理器
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+        // 开始 Fragment 事务
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        Fragment oldFragment = fragmentManager.findFragmentById(R.id.score_fragment);
+        if (oldFragment != null) {
+            transaction.remove(oldFragment);
+        }
+        // 用新的 Fragment 替换当前 Fragment（假设是 LoginFragment）
+        transaction.replace(R.id.game_board, loginFragment);
+
+        // 提交事务
+        transaction.commit();
     }
 }

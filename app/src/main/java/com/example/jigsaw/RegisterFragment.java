@@ -1,6 +1,8 @@
 package com.example.jigsaw;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,10 +68,55 @@ public class RegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_register, container, false);
+        sqlManager = new SqlManager(getActivity(), "user.db", null, 1);
+        name_input = view.findViewById(R.id.name_input);
+        password_input = view.findViewById(R.id.password_input);
+        recover_input = view.findViewById(R.id.recover_input);
+
         view.findViewById(R.id.register_login_button).setOnClickListener((v) -> {
-            start();
+            check();
         });
         return view;
+    }
+
+    SqlManager sqlManager;
+    EditText name_input;
+    EditText password_input;
+    EditText recover_input;
+
+    public void check(){
+        String username = name_input.getText().toString();
+        String password = password_input.getText().toString();
+        String recover = recover_input.getText().toString();
+        if (!username.equals("")&&!password.equals("")){
+            if (recover.length() == 6){
+                SQLiteDatabase db = sqlManager.getWritableDatabase();
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("username", username);
+                contentValues.put("password", password);
+                contentValues.put("recover",recover);
+                contentValues.put("Easy", 0);
+                contentValues.put("Medium", 0);
+                contentValues.put("Hard", 0);
+                if (db.insert("user", null, contentValues) != -1) {
+                    Toast.makeText(getActivity(),
+                            "注册成功，欢迎！", Toast.LENGTH_LONG).show();
+                    db.close();
+                    start();
+                } else {
+                    Toast.makeText(getActivity(),
+                            "注册失败，请检查用户名是否已存在！", Toast.LENGTH_LONG).show();
+                }
+                db.close();
+            } else {
+                Toast.makeText(getActivity(),
+                        "恢复代码必须是6位！", Toast.LENGTH_LONG).show();
+                recover_input.setText("");
+            }
+        } else {
+            Toast.makeText(getActivity(),
+                    "用户名和密码不可为空！", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void start(){

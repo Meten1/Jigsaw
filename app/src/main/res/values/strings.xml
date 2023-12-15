@@ -14,7 +14,8 @@
     <string name="you_have_took_0_steps">你走了0步</string>
     <string name="give_up">放弃</string>
     <string name="intact_image">完整的图像</string>
-    <string name="play_again">再来一局！</string>
+    <string name="play_again">再来一局!</string>
+    <string name="stop_play">退出</string>
 
     <string-array name="difficulty">
         <item>简单</item>
