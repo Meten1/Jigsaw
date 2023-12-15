@@ -76,6 +76,7 @@ public class RegisterFragment extends Fragment {
         view.findViewById(R.id.register_login_button).setOnClickListener((v) -> {
             check();
         });
+
         return view;
     }
 
@@ -110,7 +111,7 @@ public class RegisterFragment extends Fragment {
                 db.close();
             } else {
                 Toast.makeText(getActivity(),
-                        "恢复代码必须是6位！", Toast.LENGTH_LONG).show();
+                        "恢复代码必须是6位且不可与已有代码重复！", Toast.LENGTH_LONG).show();
                 recover_input.setText("");
             }
         } else {
@@ -138,4 +139,6 @@ public class RegisterFragment extends Fragment {
         // 提交事务
         transaction.commit();
     }
+
+
 }

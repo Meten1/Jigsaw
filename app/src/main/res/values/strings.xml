@@ -16,6 +16,10 @@
     <string name="intact_image">完整的图像</string>
     <string name="play_again">再来一局!</string>
     <string name="stop_play">退出</string>
+    <string name="recover_password">重置密码</string>
+    <string name="return_back">返回</string>
+    <string name="new_password">新密码</string>
+    <string name="recover_tip">忘记密码？点此重置密码</string>
 
     <string-array name="difficulty">
         <item>简单</item>

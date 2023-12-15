@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_fragment"
+    android:id="@+id/recover_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".LoginFragment">
+    tools:context=".RecoverFragment">
 
     <ImageView
         android:id="@+id/login_icon"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:background="@drawable/blank"
-        app:layout_constraintBottom_toTopOf="@+id/login_input"
+        app:layout_constraintBottom_toTopOf="@+id/inform_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +22,7 @@
         tools:ignore="ContentDescription" />
 
     <LinearLayout
-        android:id="@+id/login_input"
+        android:id="@+id/inform_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -33,13 +33,13 @@
 
 
         <EditText
-            android:id="@+id/name_input"
+            android:id="@+id/recover_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:ems="10"
             android:lines="1"
-            android:hint="@string/user_name"
+            android:hint="@string/recover"
             android:gravity="center"
             android:background="@drawable/login_edit_text"
             android:autofillHints="" />
@@ -52,7 +52,7 @@
             android:textSize="25sp"
             android:ems="10"
             android:lines="1"
-            android:hint="@string/password"
+            android:hint="@string/new_password"
             android:gravity="center"
             android:inputType="textPassword"
             android:background="@drawable/login_edit_text"
@@ -60,42 +60,35 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_input">
+        app:layout_constraintTop_toBottomOf="@+id/inform_input">
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/recover_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
             android:ems="8"
-            android:text="@string/login"
+            android:text="@string/recover_password"
             app:toggleCheckedStateOnClick="false"
             tools:ignore="ButtonStyle,UsingOnClickInXml" />
 
         <Button
-            android:id="@+id/register_button"
+            android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:ems="8"
-            android:text="@string/register"
+            android:text="@string/return_back"
             tools:ignore="ButtonStyle,UsingOnClickInXml" />
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/recover_button"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:text="@string/recover_tip"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

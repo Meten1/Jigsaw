@@ -82,6 +82,10 @@ public class LoginFragment extends Fragment {
         view.findViewById(R.id.register_button).setOnClickListener((v) -> {
             register();
         });
+
+        view.findViewById(R.id.recover_button).setOnClickListener((v) -> {
+            recover();
+        });
         return view;
     }
 
@@ -155,6 +159,25 @@ public class LoginFragment extends Fragment {
         // 用新的 Fragment 替换当前 Fragment（假设是 LoginFragment）
         transaction.replace(R.id.game_board, registerFragment);
 
+
+        // 提交事务
+        transaction.commit();
+    }
+
+    public void recover(){
+        RecoverFragment recoverFragment = new RecoverFragment();
+
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+        // 开始 Fragment 事务
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        Fragment oldFragment = fragmentManager.findFragmentById(R.id.login_fragment);
+        if (oldFragment != null) {
+            transaction.remove(oldFragment);
+        }
+        // 用新的 Fragment 替换当前 Fragment（假设是 LoginFragment）
+        transaction.replace(R.id.game_board, recoverFragment);
 
         // 提交事务
         transaction.commit();
