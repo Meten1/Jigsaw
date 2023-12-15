@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -145,6 +147,41 @@ public class GameFragment extends Fragment {
         return view;
     }
 
+    private void update_data() {
+        System.out.println(username+"---------------------------------------------------------------------------------------------------------");
+        SqlManager sqlManager = new SqlManager(
+                getActivity(), "user.db", null, 1);
+        SQLiteDatabase db = sqlManager.getWritableDatabase();
+        String[] columns = {"username", "Easy", "Medium", "Hard"};
+        @SuppressLint("DefaultLocale") Cursor cursor = db.query(
+                "user", columns, String.format("username = '%s'", username),
+                null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            int easy = cursor.getInt(1);
+            int medium = cursor.getInt(2);
+            int hard = cursor.getInt(3);
+            System.out.println(username+"   " + easy + "   " + medium + "   " + hard + "--------");
+            int need_update;
+            if (difficulty.equals("简单")) {
+                need_update = easy + 1;
+                difficulty = "Easy";
+            } else if (difficulty.equals("中等")) {
+                need_update = medium + 1;
+                difficulty = "Medium";
+            } else {
+                need_update = hard + 1;
+                difficulty = "Hard";
+            }
+
+            @SuppressLint("DefaultLocale") String sql = String.format(
+                    "UPDATE user SET %s = %d WHERE username = '%s'",
+                    difficulty, need_update, username);
+            db.execSQL(sql);
+            cursor.close();
+        }
+        db.close();
+    }
 
     private void add_Jigsaws() {
         for (int i = 0; i < side_quantity; i++) {
@@ -190,12 +227,9 @@ public class GameFragment extends Fragment {
             }
         }
         if (is_win) {
+            update_data();
             game_end(true);
         }
-    }
-
-    public void abandon(View view) {
-        game_end(false);
     }
 
     private void set_images() {

@@ -100,7 +100,7 @@ public class LoginFragment extends Fragment {
                             "登陆成功，欢迎！", Toast.LENGTH_LONG).show();
                     cursor.close();
                     db.close();
-                    login();
+                    login(username);
                 } else {
                     Toast.makeText(getActivity(),
                             "用户名或密码错误，请检查你的用户名与密码！",
@@ -119,8 +119,8 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    public void login(){
-        LevelFragment levelFragment = new LevelFragment();
+    public void login(String username){
+        LevelFragment levelFragment = LevelFragment.newInstance(username);
 
         // 获取 Fragment 管理器
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();

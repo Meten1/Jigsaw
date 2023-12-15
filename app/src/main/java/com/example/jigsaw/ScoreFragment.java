@@ -132,7 +132,7 @@ public class ScoreFragment extends Fragment {
     }
 
     public void again() {
-        LevelFragment levelFragment = new LevelFragment();
+        LevelFragment levelFragment = LevelFragment.newInstance(username);
 
         // 获取 Fragment 管理器
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();

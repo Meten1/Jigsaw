@@ -18,8 +18,8 @@ public class SqlManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String sql =
                 "create table user(id integer primary key autoincrement," +
-                        "username varchar(20),password varchar(20)," +
-                        "recover int," +
+                        "username varchar(20) UNIQUE,password varchar(20)," +
+                        "recover int UNIQUE," +
                         "Easy int,Medium int,Hard int)";
         sqLiteDatabase.execSQL(sql);
     }
