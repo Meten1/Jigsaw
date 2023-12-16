@@ -2,22 +2,20 @@ package com.example.jigsaw;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,21 +25,12 @@ import android.widget.Toast;
 public class LoginFragment extends Fragment {
 
 
-
     public LoginFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LoginFragment newInstance(String param1, String param2) {
+
+    public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -84,20 +73,13 @@ public class LoginFragment extends Fragment {
             password_input.setText(sharedPreferences.getString(KEY_PASSWORD, ""));
         }
 
-        view.findViewById(R.id.login_button).setOnClickListener((v) -> {
-            check();
-        });
-        view.findViewById(R.id.register_button).setOnClickListener((v) -> {
-            register();
-        });
-
-        view.findViewById(R.id.recover_button).setOnClickListener((v) -> {
-            recover();
-        });
+        view.findViewById(R.id.login_button).setOnClickListener((v) -> check());
+        view.findViewById(R.id.register_button).setOnClickListener((v) -> register());
+        view.findViewById(R.id.recover_button).setOnClickListener((v) -> recover());
         return view;
     }
 
-    public void check(){
+    public void check() {
         String username = name_input.getText().toString();
         String password = password_input.getText().toString();
         if (!username.equals("") && !password.equals("")) {
@@ -112,7 +94,7 @@ public class LoginFragment extends Fragment {
                             "登陆成功，欢迎！", Toast.LENGTH_LONG).show();
                     cursor.close();
                     db.close();
-                    login(username,password);
+                    login(username, password);
                 } else {
                     Toast.makeText(getActivity(),
                             "用户名或密码错误，请检查你的用户名与密码！",
@@ -131,7 +113,7 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    public void login(String username, String password){
+    public void login(String username, String password) {
 
         if (rememberButton.isChecked()) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -181,7 +163,7 @@ public class LoginFragment extends Fragment {
         transaction.commit();
     }
 
-    public void recover(){
+    public void recover() {
         RecoverFragment recoverFragment = new RecoverFragment();
 
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
@@ -199,8 +181,6 @@ public class LoginFragment extends Fragment {
         // 提交事务
         transaction.commit();
     }
-
-
 
 
 }

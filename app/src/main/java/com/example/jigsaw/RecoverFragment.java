@@ -1,19 +1,16 @@
 package com.example.jigsaw;
 
 import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +18,6 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class RecoverFragment extends Fragment {
-
 
 
     public RecoverFragment() {
@@ -40,6 +36,7 @@ public class RecoverFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
     SqlManager sqlManager;
 
     View view;
@@ -51,33 +48,29 @@ public class RecoverFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_recover, container, false);
         sqlManager = new SqlManager(getActivity(), "user.db", null, 1);
 
-        view.findViewById(R.id.recover_button).setOnClickListener((v) -> {
-            recover();
-        });
-        view.findViewById(R.id.back_button).setOnClickListener((v) -> {
-            back();
-        });
+        view.findViewById(R.id.recover_button).setOnClickListener((v) -> recover());
+        view.findViewById(R.id.back_button).setOnClickListener((v) -> back());
 
         return view;
     }
 
-    public void recover(){
+    public void recover() {
         EditText revoverInput = view.findViewById(R.id.recover_input);
         EditText passwordInput = view.findViewById(R.id.password_input);
         SQLiteDatabase db = sqlManager.getWritableDatabase();
         @SuppressLint("DefaultLocale") String sql = String.format(
                 "UPDATE user set password = %s WHERE recover = '%s'",
-                passwordInput.getText().toString(),revoverInput.getText().toString());
+                passwordInput.getText().toString(), revoverInput.getText().toString());
         try {
             db.execSQL(sql);
-        } catch (Exception ignored){
-            System.out.println(passwordInput.getText().toString()+"  "+revoverInput.getText().toString() + "------------------------");
+        } catch (Exception ignored) {
+            System.out.println(passwordInput.getText().toString() + "  " + revoverInput.getText().toString() + "------------------------");
         }
         db.close();
         back();
     }
 
-    public void back(){
+    public void back() {
         LoginFragment loginFragment = new LoginFragment();
         // 获取 Fragment 管理器
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();

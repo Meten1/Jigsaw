@@ -9,9 +9,9 @@ import java.io.InputStream;
 
 public class ImageManager {
 
-    private String assetPath;
+    private final String assetPath;
     private String[] imageNames;
-    private AssetManager assetManager;
+    private final AssetManager assetManager;
 
     public ImageManager(AssetManager assetManager, String assetPath) {
         this.assetPath = assetPath;
@@ -29,8 +29,7 @@ public class ImageManager {
             InputStream stream = assetManager.open(assetPath + imageNames[index]);
             image = BitmapFactory.decodeStream(stream);
             stream.close();
-        } catch (IOException e) {
-            System.out.println("Error");
+        } catch (IOException ignored) {
         }
         return image;
     }

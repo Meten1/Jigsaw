@@ -1,19 +1,17 @@
 package com.example.jigsaw;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
@@ -24,12 +22,10 @@ import java.util.ArrayList;
  */
 public class ScoreFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private ArrayList<String> mParam1;
     private boolean mParam2;
 
@@ -45,7 +41,6 @@ public class ScoreFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment ScoreFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ScoreFragment newInstance(ArrayList<String> param1, boolean param2) {
         ScoreFragment fragment = new ScoreFragment();
         Bundle args = new Bundle();
@@ -103,7 +98,7 @@ public class ScoreFragment extends Fragment {
         int image_index = Integer.parseInt(mParam1.get(1));
         imageView.setImageBitmap(imageManager.get(image_index));
 
-        screen_width = Integer.parseInt(mParam1.get(2));;
+        screen_width = Integer.parseInt(mParam1.get(2));
 
         username = mParam1.get(3);
         step = Integer.parseInt(mParam1.get(4));
@@ -120,13 +115,9 @@ public class ScoreFragment extends Fragment {
         step_tip = view.findViewById(R.id.step_tip);
         step_tip.setText(String.format("你一共走了%d步", step));
 
-        view.findViewById(R.id.again_button).setOnClickListener((v) -> {
-            again();
-        });
+        view.findViewById(R.id.again_button).setOnClickListener((v) -> again());
 
-        view.findViewById(R.id.stop_button).setOnClickListener((v) -> {
-            stop();
-        });
+        view.findViewById(R.id.stop_button).setOnClickListener((v) -> stop());
 
         return view;
     }

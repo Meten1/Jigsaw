@@ -1,17 +1,11 @@
 package com.example.jigsaw;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,28 +31,18 @@ import java.util.Random;
  */
 public class GameFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public GameFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param level Parameter 1.
-     * @param userName Parameter 2.
-     * @return A new instance of fragment GameFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static GameFragment newInstance(String level, String userName) {
         GameFragment fragment = new GameFragment();
         Bundle args = new Bundle();
@@ -141,14 +129,11 @@ public class GameFragment extends Fragment {
 
         add_Jigsaws();
         set_images();
-        view.findViewById(R.id.give_up_botton).setOnClickListener((v) -> {
-            game_end(false);
-        });
+        view.findViewById(R.id.give_up_botton).setOnClickListener((v) -> game_end(false));
         return view;
     }
 
     private void update_data() {
-        System.out.println(username+"---------------------------------------------------------------------------------------------------------");
         SqlManager sqlManager = new SqlManager(
                 getActivity(), "user.db", null, 1);
         SQLiteDatabase db = sqlManager.getWritableDatabase();
@@ -161,7 +146,6 @@ public class GameFragment extends Fragment {
             int easy = cursor.getInt(1);
             int medium = cursor.getInt(2);
             int hard = cursor.getInt(3);
-            System.out.println(username+"   " + easy + "   " + medium + "   " + hard + "--------");
             int need_update;
             if (difficulty.equals("简单")) {
                 need_update = easy + 1;
@@ -298,7 +282,7 @@ public class GameFragment extends Fragment {
         data.add(String.valueOf(step));
         data.add(difficulty);
 
-        ScoreFragment scoreFragment = ScoreFragment.newInstance(data,is_win);
+        ScoreFragment scoreFragment = ScoreFragment.newInstance(data, is_win);
 
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 
