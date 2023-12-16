@@ -20,6 +20,10 @@ import androidx.fragment.app.FragmentTransaction;
  */
 public class LevelFragment extends Fragment {
 
+
+
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,13 +68,13 @@ public class LevelFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_level,
                 container, false);
 
-//
-//        view.findViewById(R.id.play).setOnClickListener((v) -> {
-//
-//        });
         view.findViewById(R.id.play).setOnClickListener((v) -> {
             play();
         });
+        view.findViewById(R.id.history_button).setOnClickListener((v) -> {
+            showHistory();
+        });
+
         return view;
     }
 
@@ -96,7 +100,25 @@ public class LevelFragment extends Fragment {
         transaction.commit();
     }
 
+    public void showHistory(){
+        HistoryFragment historyFragment = HistoryFragment.newInstance(mParam1);
 
+        // 获取 Fragment 管理器
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+        // 开始 Fragment 事务
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        Fragment oldFragment = fragmentManager.findFragmentById(R.id.level_fragment);
+        if (oldFragment != null) {
+            transaction.remove(oldFragment);
+        }
+        // 用新的 Fragment 替换当前 Fragment（假设是 LoginFragment）
+        transaction.replace(R.id.game_board, historyFragment);
+
+        // 提交事务
+        transaction.commit();
+    }
 
 
 }
