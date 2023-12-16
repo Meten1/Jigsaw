@@ -21,6 +21,7 @@
     <string name="new_password">新密码</string>
     <string name="recover_tip">忘记密码？点此重置密码</string>
     <string name="show_history">点击查看历史成绩</string>
+    <string name="remember_password">记住密码</string>
 
     <string-array name="difficulty">
         <item>简单</item>

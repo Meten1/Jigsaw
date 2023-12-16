@@ -57,13 +57,18 @@
             android:inputType="textPassword"
             android:background="@drawable/login_edit_text"
             android:autofillHints="" />
+
+        <CheckBox
+            android:id="@+id/remember_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remember_password"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

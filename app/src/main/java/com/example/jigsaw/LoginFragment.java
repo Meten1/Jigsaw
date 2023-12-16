@@ -1,6 +1,9 @@
 package com.example.jigsaw;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -53,6 +57,14 @@ public class LoginFragment extends Fragment {
     EditText name_input;
     EditText password_input;
 
+    private SharedPreferences sharedPreferences;
+    private static final String PREF_NAME = "user";
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_PASSWORD = "password";
+    private static final String KEY_REMEMBER_PASSWORD = "rememberPassword";
+    private CheckBox rememberButton;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +74,15 @@ public class LoginFragment extends Fragment {
         sqlManager = new SqlManager(getActivity(), "user.db", null, 1);
         name_input = view.findViewById(R.id.name_input);
         password_input = view.findViewById(R.id.password_input);
+        rememberButton = view.findViewById(R.id.remember_button);
+
+        sharedPreferences = getActivity().getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+
+        if (sharedPreferences.getBoolean(KEY_REMEMBER_PASSWORD, false)) {
+            rememberButton.setChecked(true);
+            name_input.setText(sharedPreferences.getString(KEY_USERNAME, ""));
+            password_input.setText(sharedPreferences.getString(KEY_PASSWORD, ""));
+        }
 
         view.findViewById(R.id.login_button).setOnClickListener((v) -> {
             check();
@@ -91,7 +112,7 @@ public class LoginFragment extends Fragment {
                             "登陆成功，欢迎！", Toast.LENGTH_LONG).show();
                     cursor.close();
                     db.close();
-                    login(username);
+                    login(username,password);
                 } else {
                     Toast.makeText(getActivity(),
                             "用户名或密码错误，请检查你的用户名与密码！",
@@ -110,7 +131,16 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    public void login(String username){
+    public void login(String username, String password){
+
+        if (rememberButton.isChecked()) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(KEY_USERNAME, username);
+            editor.putString(KEY_PASSWORD, password);
+            editor.putBoolean(KEY_REMEMBER_PASSWORD, true);
+            editor.apply();
+        }
+
         LevelFragment levelFragment = LevelFragment.newInstance(username);
 
         // 获取 Fragment 管理器
